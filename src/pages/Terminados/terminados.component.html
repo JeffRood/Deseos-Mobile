@@ -1,0 +1,50 @@
+
+<ion-header>
+  <ion-navbar color="danger">
+    <ion-title>Lista de Terminado</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-grid *ngIf="( servicios.lista | Pendientes:true  ).length == 0">
+        <ion-row>
+        <ion-col class="text-center caja-vacia">
+           <p>
+             No hay Lista Terminadas.</p>
+             <ion-icon class="icono-grande" ios="ios-list-box" md="md-list-box"></ion-icon>
+
+        </ion-col>
+
+        </ion-row>
+
+          </ion-grid>
+
+  <ion-card  *ngFor="let Lista of servicios.lista | Pendientes:true ; let i = index">
+
+
+    <ion-item color="primary" (click)="verDetalle(Lista, i)">
+    <ion-note item-right>{{Lista.Item.length}}</ion-note>
+<h2> {{Lista.nombre}}</h2>
+   </ion-item>
+   <ion-list>
+<ion-item *ngFor="let data of Lista.Item | slice:0:2">
+    <ion-icon *ngIf="!data.completa" ios="ios-square-outline" md="md-square-outline"></ion-icon>
+    <ion-icon *ngIf="data.completa" ios="ios-checkbox-outline " md="md-checkbox-outline"></ion-icon>
+   {{data.nombre}}
+</ion-item>
+
+<ion-item  (click)="verDetalle(Lista, i)"
+class="text-center" *ngIf="Lista.Item.length > 2">
+    <ion-icon color= "danger" ios="ios-arrow-dropdown" md="ios-arrow-dropdown-outline"></ion-icon>
+
+</ion-item>
+
+
+</ion-list>
+  </ion-card>
+
+
+
+
+
+</ion-content>
